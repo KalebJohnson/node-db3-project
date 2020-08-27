@@ -51,10 +51,10 @@ router.post('/', (req, res) => {
 
   Schemes.add(schemeData)
   .then(scheme => {
-    res.status(201).json(scheme);
+    res.status(200).json({ message: "scheme created!" });
   })
   .catch (err => {
-    res.status(500).json({ message: 'Failed to create new scheme' });
+    res.status(500).json({ message: 'Failed to create new scheme, make sure it doesnt already exist!' });
   });
 });
 
@@ -87,7 +87,7 @@ router.put('/:id', (req, res) => {
     if (scheme) {
       Schemes.update(changes, id)
       .then(updatedScheme => {
-        res.json(updatedScheme);
+        res.json({message:"Scheme updated!"});
       });
     } else {
       res.status(404).json({ message: 'Could not find scheme with given id' });
@@ -113,5 +113,9 @@ router.delete('/:id', (req, res) => {
     res.status(500).json({ message: 'Failed to delete scheme' });
   });
 });
+
+
+
+
 
 module.exports = router;
